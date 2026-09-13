@@ -1,6 +1,6 @@
 name: Build Roothide deb
 
-on:
+'on':
   workflow_dispatch:
 
 jobs:
@@ -13,17 +13,15 @@ jobs:
 
       - name: Install dependencies
         run: |
-          brew update
           brew install ldid dpkg make
 
       - name: Install Theos
         run: |
-          git clone --recursive https://github.com/theos/theos.git $HOME/theos
-          echo "THEOS=$HOME/theos" >> $GITHUB_ENV
+          git clone --recursive https://github.com/theos/theos.git "$HOME/theos"
 
       - name: Build package
         run: |
-          export THEOS=$HOME/theos
+          export THEOS="$HOME/theos"
           make clean
           make package FINALPACKAGE=1
 
